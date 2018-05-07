@@ -1,0 +1,90 @@
+server:
+    port: 8080
+    context-path: /api
+
+## Redis数据库索引（默认为0）
+#spring.redis.database=0
+## Redis服务器地址
+#spring.redis.host=192.168.1.118
+## Redis服务器连接端口
+#spring.redis.port=6381
+## Redis服务器连接密码（默认为空）
+#spring.redis.password=
+## 连接池最大连接数（使用负值表示没有限制）
+#spring.redis.pool.max-active=8
+## 连接池最大阻塞等待时间（使用负值表示没有限制）
+#spring.redis.pool.max-wait=-1
+## 连接池中的最大空闲连接
+#spring.redis.pool.max-idle=8
+## 连接池中的最小空闲连接
+#spring.redis.pool.min-idle=0
+## 连接超时时间（毫秒）
+#spring.redis.timeout=0
+
+spring:
+    datasource:
+        name: test
+        url: jdbc:mysql://localhost:3306/framework
+        username: root
+        password: 123456
+        # 使用druid数据源
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        filters: stat
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+
+mybatis:
+    mapper-locations: classpath:mapper/*.xml
+    type-aliases-package: com.app.framework.auth.model,com.app.framework.model
+    mapUnderscoreToCamelCase: true
+mapper:
+    mappers: com.app.framework.core.utils.BaseDao
+    not-empty:  false
+    identity: MYSQL
+#pagehelper分页插件
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+shiro:
+    login-max-retry: 5
+    login-retry-wait: 600
+    need-role: true
+    need-permission: true
+
+logging:
+    level:
+        com.app.framework: debug
+
+#微信相关配置
+wx:
+  accessToken:
+    url: https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s
+  appid: wx6538de249a5c6962
+  appsecret: c2e1f6a5323837f29af31f607af26029
+#微信网页授权登录第一步获得code的url
+  oauth:
+    getCode:
+      url: https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=%s&state=STATE#wechat_redirect
+#微信网页授权回掉地址
+    redirect:
+      url: ccc.c
+#微信网页授权获取网页中的accessToken
+    getAccessToken:
+      url: https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code
+#获取用户详细信息
+    userInfo:
+      url: https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN
