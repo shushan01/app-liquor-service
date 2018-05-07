@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * 微信基础接口的实现类
@@ -27,6 +29,9 @@ public class WxBaseServiceImpl implements WxBaseService {
     @Value("${wx.appsecret}")
     private String appsecret;
 
+    @Value("${wx.accessToken.expiresTime}")
+    private Long expiresTime;
+
     @Autowired
     private WxBaseJson wxBaseJson;
 
@@ -36,7 +41,14 @@ public class WxBaseServiceImpl implements WxBaseService {
 
     @PostConstruct
     public void init() {
-        getAccessToken();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                getToken();
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(timerTask, 100, expiresTime);
     }
 
     @Override
@@ -46,6 +58,10 @@ public class WxBaseServiceImpl implements WxBaseService {
                 return accessToken.getAccessToken();
             }
         }
+        return getToken();
+    }
+
+    private String getToken() {
         String url = this.getAccessTokenUrl();
         String result = HttpClientUtils.getToUrl(url);
         try {
