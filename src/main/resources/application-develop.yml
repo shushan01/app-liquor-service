@@ -72,6 +72,7 @@ logging:
 #微信相关配置
 wx:
   accessToken:
+    expiresTime: 6600000
     url: https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s
   appid: wx6538de249a5c6962
   appsecret: c2e1f6a5323837f29af31f607af26029
