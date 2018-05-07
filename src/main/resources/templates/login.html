@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>酒品会</title>
 </head>
 <body>
 </body>
-<script language="javascript">
+<script th:inline="javascript">
     var jsessionid = [[${jsessionid}]];
     var url = "http://localhost:8090/app-liquor-view?jsessionid=" + jsessionid;
     location.href = url;
