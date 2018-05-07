@@ -88,3 +88,9 @@ wx:
 #获取用户详细信息
     userInfo:
       url: https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN
+
+#物流信息相关配置
+logistic:
+    eBusinessID:  1338431
+    appKey: 95342d97-281f-4cd1-8df4-cf2554ca5bfb
+    reqURL: http://testapi.kdniao.cc:8081/api/Eorderservice
