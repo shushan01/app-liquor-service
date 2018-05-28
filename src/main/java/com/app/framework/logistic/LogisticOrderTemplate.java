@@ -70,6 +70,27 @@ public class LogisticOrderTemplate {
         return sender(requestData, "1147");
     }
 
+    /**
+     * 即时查询物流
+     * <p>
+     * 一、接口描述/说明
+     * （1）查询接口支持按照运单号查询(单个查询)。
+     * （2）接口需要指定快递单号的快递公司编码，格式不对或则编码错误都会返失败的信息。
+     * 如：EMS物流单号应选择快递公司编码（EMS）查看快递公司编码
+     * （3）返回的物流跟踪信息按照发生的时间升序排列。
+     * （4）接口指令1002。
+     * （5）接口支持的消息接收方式为HTTP POST，请求方法的编码格式(utf-8)："application/x-www-form-urlencoded;charset=utf-8"。
+     * （6）测试地址：http://sandboxapi.kdniao.cc:8080/kdniaosandbox/gateway/exterfaceInvoke.json
+     * （7）正式地址：http://api.kdniao.cc/Ebusiness/EbusinessOrderHandle.aspx
+     *
+     * @param requestData
+     * @return
+     * @throws Exception
+     */
+    public Map<String, Object> realTimeFind(RealTimeLogisticRequestData requestData) throws Exception {
+        return sender(requestData, "1002");
+    }
+
     private Map<String, Object> sender(Object requestData, String requestType) throws Exception {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
