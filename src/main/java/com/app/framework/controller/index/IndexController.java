@@ -1,6 +1,6 @@
-package com.app.framework.auth.controller.index;
+package com.app.framework.controller.index;
 
-import com.app.framework.auth.model.ProductEntyty;
+import com.app.framework.model.ProductEntyty;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +24,7 @@ public class IndexController {
         //推荐
         List<List<ProductEntyty>> list = getProductMock(baseUrl);
         map.put("recommend", list);
+        map.put("cartCount", 2);
         return map;
     }
 
